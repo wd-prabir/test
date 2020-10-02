@@ -21,13 +21,14 @@
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">Add Note</h5>
+            <input name="title" id="addTitle" class="form-control mb-2" placeholder="Enter Title">
 
             <textarea class="form-control textArea" id="addText" rows="3"></textarea>
             <button id="addBtn" class="btn btn-primary mt-3">Add Note</button>
         </div>
     </div>
 
-    <h3> Your Notes </h3>
+    <h3> Your Notes </h3> <span id="allDelete" class="btn btn-warning btn-sm">Delete all Data </span>
     <hr>
 
 <div id="notes" class=" row container-fluid ">

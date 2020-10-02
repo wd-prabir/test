@@ -2,15 +2,23 @@ let addBtn = document.getElementById('addBtn');
 showNotes();
 addBtn.addEventListener('click', function (e) {
     let textValue = document.getElementById('addText')
+    let titleValue = document.getElementById('addTitle')
     let notes = localStorage.getItem('notes');
     if (notes == null) {
         noteObj = [];
     } else {
         noteObj = JSON.parse(notes)
     }
-    noteObj.push(textValue.value);
+
+    let data = {
+        text: textValue.value,
+        title: titleValue.value
+    }
+
+    noteObj.push(data);
     localStorage.setItem('notes', JSON.stringify(noteObj))
     textValue.value = '';
+    titleValue.value = '';
     showNotes();
 })
 
@@ -22,12 +30,12 @@ function showNotes() {
         noteObj = JSON.parse(notes)
     }
     let html = '';
-    noteObj.forEach(function (elements, index) {
+    noteObj.forEach(function (elements,index) {
         html += `
           <div class="noteCard mx-2 my-2 card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">Note ${index + 1}</h5>
-                <p> ${elements}</p>
+                <h5 class="card-title">${elements.title}</h5>
+                <p> ${elements.text}</p>
                 <button  id="${index}" onclick="deleteNode(this.id)" class="btn btn-danger btn-sm">delete Note</button>
             </div>
         </div>
@@ -65,4 +73,11 @@ search.addEventListener('input', function () {
     }
   })
 
+})
+
+let deleteAll = document.getElementById('allDelete')
+deleteAll.addEventListener('click', function () {
+    localStorage.clear()
+    let notes = localStorage.getItem('notes');
+    showNotes()
 })
